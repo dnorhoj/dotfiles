@@ -1,0 +1,11 @@
+# Shell Aliases
+alias ll='ls -alF'
+alias lls='ls -alF; ls'
+alias cls='clear'
+
+# Vim boofing
+alias ":q=exit"
+
+# Python
+alias pippy='pipenv run python'
+alias pip3='sudo -H pip3'
