@@ -2,10 +2,11 @@
 alias ll='ls -alF'
 alias lls='ls -alF; ls'
 alias cls='clear'
+alias h='echo h'
 
 # Vim boofing
-alias ":q=exit"
+alias vim="nvim"
+alias :q="exit"
 
 # Python
 alias pippy='pipenv run python'
-alias pip3='sudo -H pip3'
