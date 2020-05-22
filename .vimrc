@@ -1,81 +1,124 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
-
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-
-" Plugins
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-Plugin 'mhinz/vim-startify'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
-Plugin 'Xuyuanp/nerdtree-git-plugin'
-Plugin 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'kaicataldo/material.vim'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rhubarb'
-
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
 "
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+" VimPlug plugins
 "
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+call plug#begin('~/.vim/plugged')
 
-set nu
-set encoding=utf-8
-set clipboard=unnamed
-
-" Python options
-
-au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
-    \ set softtabstop=4 |
-    \ set shiftwidth=4 |
-    \ set textwidth=79 |
-    \ set expandtab |
-    \ set autoindent |
-    \ set fileformat=unix
-
-let g:pymode_python = 'python3'
-let g:pymode_warnings = 0
-
-" autocmd FileType python nnoremap <buffer> <F5> :exec '!python3' shellescape(@%, 1)<cr>
-autocmd FileType python nnoremap <buffer> <F5> :!python3 %<CR>
+" Color theme
+Plug 'altercation/vim-colors-solarized'
 
 " Misc
+Plug 'tpope/vim-sensible'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tomasiser/vim-code-dark'
+Plug 'scrooloose/syntastic'
+Plug 'sbdchd/vim-run'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'jiangmiao/auto-pairs'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'mhinz/vim-startify'
+Plug 'tmhedberg/SimpylFold'
+Plug 'vim-scripts/brainfuck-syntax'
+Plug 'lervag/vimtex'
+Plug 'sirver/ultisnips'
 
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+call plug#end()
 
-let python_highlight_all=1
-
-syntax on
+"
+" Color theme
+"
+syntax enable
 set background=dark
-colorscheme solarized
+" colorscheme solarized
+colorscheme codedark
 
+"
+" Deoplete (autocomplete)
+"
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#jedi#show_docstring = 1
+
+"
+" Airline (bottom bar)
+"
+let g:airline_theme='codedark'
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+"<C-LeftRelease>
 " NERDTree
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+"
+map <F2> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen = 1
 
-let g:nerdtree_tabs_open_on_console_startup = 2
+"
+" Syntastic
+" 
+let g:syntastic_python_checkers = ['pyflakes']
+
+"
+" Vimtex
+"
+let g:tex_flavor='latex'
+let g:vimtex_view_method='zathura'
+let g:vimtex_quickfix_mode=0
+set conceallevel=1
+let g:tex_conceal='abdmg'
+"let g:vimtex_compiler_method = 'latexmk'
+
+"
+" Ultisnips
+"
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger = '<tab>'
+let g:UltiSnipsJumpBackwardTrigger = '<s-tab>'
+
+"
+" RUN
+"
+let g:run_cmd_python = ['python3']
+let g:run_cmd_brainfuck = ['beef', '--enable-debugging', run#defaults#fullfilepath()] 
+
+"
+" Settings
+"
+set number " Enable line numbers
+set mouse=a " Enable mouse
+set splitbelow " Open splits vertically
+
+"
+" Per-filetype syntax
+"
+au BufRead,BufNewFile *.bf set filetype=brainfuck
+
+"
+" Keybinds
+"
+
+" Run file with F5
+noremap <F5> :Run<CR>
+
+" Tab control
+noremap <C-t> :tabnew<CR>
+
+"noremap <C-w> :q<CR>
+noremap <C-s> :w<CR>
+
+" Selection
+noremap <C-a> ggVG 
+
+" Tab change keybinds
+noremap <unique> <M-1> 1gt
+noremap <unique> <M-2> 2gt
+noremap <unique> <M-3> 3gt
+noremap <unique> <M-4> 4gt
+noremap <unique> <M-5> 5gt
+noremap <unique> <M-6> 6gt
+noremap <unique> <M-7> 7gt
+noremap <unique> <M-8> 8gt
+noremap <unique> <M-9> 9gt
+noremap <unique> <M-0> 10gt
