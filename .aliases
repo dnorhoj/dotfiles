@@ -1,12 +1,30 @@
 # Shell Aliases
 alias ll='ls -alF'
 alias lls='ls -alF; ls'
+alias tree='exa --tree'
 alias cls='clear'
 alias h='echo h'
+alias cd='z'
+alias cdd='zi'
+alias op='xdg-open'
+alias '$='
+alias hax=cmatrix
 
 # Vim boofing
-alias vim="nvim"
+alias vim="lvim"
 alias :q="exit"
 
-# Python
+# Spotify boofing
+alias sp="spotify"
+alias spp="spotify play"
+alias sps="spotify status -v"
+alias spn="spotify next"
+
+# Other aliases
 alias pippy='pipenv run python'
+alias ipme='curl ip.me'
+alias fopen='xdg-open $(fzf)'
+
+# Meme
+alias ifconfig='ifconfig | lolcat'
+alias cpmeme='wl-paste | meme /dev/stdin'

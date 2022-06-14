@@ -1,0 +1,98 @@
+{
+    "layer": "bottom",
+    "position": "top",
+    "height": 34,
+
+    "modules-left": ["sway/workspaces", "custom/spotify", "sway/mode"],
+    "modules-center": ["clock"],
+    "modules-right": ["tray", "backlight", "pulseaudio", "network", "battery"],
+    "sway/mode": {
+        "format": " {}"
+    },
+    "sway/window": {
+        "max-length": 80,
+        "tooltip": false
+    },
+    "clock": {
+        "format": "{:%a %B %d, %Y · %H:%M}",
+        "tooltip": false
+    },
+    "battery": {
+        "bat": "BAT0",
+        "format": "{icon} {capacity}%",
+        "format-alt": "{icon} {time}",
+        "format-alt-click": "click-right",
+        "format-time": "{H}:{M}",
+        "format-icons": ["", "", "", "", ""],
+        "format-charging": "  {capacity}%",
+        "interval": 30,
+        "states": {
+            "warning": 25,
+            "critical": 10
+        },
+        "tooltip": false
+    },
+    "network": {
+        "format": "{icon} {essid}",
+        "format-alt": "{icon} {ipaddr}",
+        "format-alt-click": "click-right",
+        "format-icons": {
+            "wifi": ["睊", "直" ,""],
+            "ethernet": [""],
+            "disconnected": [""]
+        },
+        "on-click": "foot -e nmtui",
+        "tooltip": false
+    },
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": " ",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "default": "",
+            "speaker": ""
+        },
+        "scroll-step": 1,
+        "on-click": "pavucontrol",
+        "tooltip": false
+    },
+    "custom/spotify": {
+        "interval": 1,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/spotify.sh",
+        "exec-if": "pgrep spotify",
+        "on-click": "foot -e spt",
+        "escape": true
+    },
+    "custom/nordvpn": {
+        "interval": 30,
+        "return-type": "json",
+        "exec": "~/.config/waybar/modules/nordvpn.sh",
+        "exec-if": "nordvpn status | rg Connected",
+        "escape": true
+    },
+    "backlight": {
+        "device": "intel_backlight",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", ""],
+        "on-scroll-up": "brightnessctl set 5%-",
+        "on-scroll-down": "brightnessctl set +5%"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": false
+    },
+    "tray": {
+        "icon-size": 18
+    }
+}
+

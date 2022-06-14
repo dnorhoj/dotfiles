@@ -1,0 +1,7 @@
+screenshots
+clock
+indicator
+fade-in=.5
+effect-blur=10x10
+datestr=%B %d, %Y
+font=sans
