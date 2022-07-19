@@ -28,3 +28,15 @@ alias fopen='xdg-open $(fzf)'
 # Meme
 alias ifconfig='ifconfig | lolcat'
 alias cpmeme='wl-paste | meme /dev/stdin'
+
+# FootSSH
+footssh()
+{
+    if [[ $TERM = "foot" ]]; then
+	TERM=linux ssh $@
+    else
+	ssh $@
+    fi
+}
+
+alias ssh=footssh
