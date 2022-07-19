@@ -56,6 +56,5 @@ bindkey ^H backward-delete-word
 
 source ~/.aliases
 
-fortune | cowsay | lolcat
+fortune theoffice | sed '2,$ s/^/\n/g' | cowsay -W$(($(tput cols)-4)) | lolcat
 echo
-
