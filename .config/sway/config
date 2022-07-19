@@ -44,7 +44,7 @@ bindsym $mod+y exec clipman pick --tool="wofi" --max-items=30
 # Wob setup
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -abottom -M100 -b1 -p0 -o0 -H30 --overflow-bar-color="#AAAAAAFF" --overflow-background-color="#000000DD" --background-color="#000000DD"
 
 ################
 # Key bindings #
@@ -108,14 +108,14 @@ bindsym $mod+Shift+Right move right
 # Workspace names
 set $ws1 "1"
 set $ws2 "2"
-set $ws3 "3 - Discord"
-set $ws4 "4 - Music"
+set $ws3 "3"
+set $ws4 "4"
 set $ws5 "5 - Code"
 set $ws6 "6"
 set $ws7 "7"
 set $ws8 "8"
-set $ws9 "9"
-set $ws0 "10"
+set $ws9 "9 - Music"
+set $ws0 "10 - Chats"
 
 # Switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -127,7 +127,7 @@ bindsym $mod+6 workspace number $ws6
 bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
-bindsym $mod+0 workspace number $ws10
+bindsym $mod+0 workspace number $ws0
 # Move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -138,7 +138,7 @@ bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+0 move container to workspace number $ws0
 
 ################
 # Layout stuff #
@@ -215,7 +215,7 @@ default_floating_border pixel
 smart_borders on
 
 # Wallpaper
-output * bg /home/dnorhoj/Pictures/wallpaper2.jpg tile
+output * bg /home/dnorhoj/Pictures/wallpaper.png fill
 
 # Enable waybar (config in ~/.config/waybar/)
 bar {
