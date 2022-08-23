@@ -13,14 +13,18 @@ set $term foot
 # Menu
 set $menu exec wofi -IS drun
 
+# Screens
+set $output-primary eDP-1
+set $output-secondary DP-2
+
 ######################
 # Idle configuration #
 ######################
 
-exec swayidle -w \
-  timeout 300 'swaylock' \
-  timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-  before-sleep 'swaylock'
+#exec swayidle -w \
+#  timeout 300 'swaylock' \
+#  timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+#  before-sleep 'swaylock'
 
 #######################
 # Input configuration #
@@ -44,7 +48,7 @@ bindsym $mod+y exec clipman pick --tool="wofi" --max-items=30
 # Wob setup
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -abottom -M100 -b1 -p0 -o0 -H30 --overflow-bar-color="#AAAAAAFF" --overflow-background-color="#000000DD" --background-color="#000000DD"
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -abottom -M100 -b1 -p1 -o0 -H30 --overflow-bar-color="#AAAAAAFF" --overflow-background-color="#000000DD" --background-color="#000000DD"
 
 ################
 # Key bindings #
@@ -54,7 +58,6 @@ exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -abottom -M100 -b1 -p0 -o0 -H30 -
 bindsym $mod+Return exec $term
 
 # Kill focused window
-bindsym $mod+Shift+q kill
 bindsym Alt+F4 kill
 
 # Start your launcher
@@ -155,6 +158,7 @@ bindsym $mod+e layout toggle split
 
 # Make the current focus fullscreen
 bindsym $mod+f fullscreen
+bindsym $mod+z floating toggle; resize set width 100ppt height 100ppt; move position center
 
 # Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
@@ -198,7 +202,7 @@ mode "resize" {
     bindsym Escape mode "default"
     bindsym $mod+r mode "default"
 }
-bindsym $mod+r mode "resize"
+#bindsym $mod+r mode "resize"
 
 ################
 # Visual stuff #
@@ -207,7 +211,7 @@ bindsym $mod+r mode "resize"
 # Gaps
 gaps outer 2
 gaps inner 10
-smart_gaps on
+#smart_gaps on
 
 # Border
 default_border pixel
@@ -215,7 +219,15 @@ default_floating_border pixel
 smart_borders on
 
 # Wallpaper
-output * bg /home/dnorhoj/Pictures/wallpaper.png fill
+output * bg /home/dnorhoj/Pictures/wallpaper2.jpg fill
+
+# Output setup
+
+# Second monitor portrait on mod+f12
+bindsym $mod+f12 output $output-primary pos 0 500; output $output-secondary transform 270 pos 1920 0
+
+# Second monitor landscape on mod+f11
+bindsym $mod+f11 output $output-primary pos 0 0; output $output-secondary transform 0 pos 1920 0
 
 # Enable waybar (config in ~/.config/waybar/)
 bar {
