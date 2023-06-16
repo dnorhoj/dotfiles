@@ -5,7 +5,7 @@
 
     "modules-left": ["sway/workspaces", "custom/spotify", "sway/mode"],
     "modules-center": ["clock"],
-    "modules-right": ["tray", "backlight", "pulseaudio", "network", "battery"],
+    "modules-right": ["tray", "cpu", "memory", "backlight", "pulseaudio", "network", "battery"],
     "sway/mode": {
         "format": " {}"
     },
@@ -14,8 +14,9 @@
         "tooltip": false
     },
     "clock": {
-        "format": "{:%a %B %d, %Y · %H:%M}",
-        "tooltip": false
+        "format": "{:%a %B %d, %Y · %H:%M:%S}",
+        "tooltip": false,
+        "interval": 1
     },
     "battery": {
         "bat": "BAT0",
@@ -23,8 +24,8 @@
         "format-alt": "{icon} {time}",
         "format-alt-click": "click-right",
         "format-time": "{H}:{M}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "  {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+        "format-charging": "󰂄 {capacity}%",
         "interval": 30,
         "states": {
             "warning": 25,
@@ -37,25 +38,25 @@
         "format-alt": "{icon} {ipaddr}",
         "format-alt-click": "click-right",
         "format-icons": {
-            "wifi": ["睊", "直" ,""],
-            "ethernet": [""],
-            "disconnected": [""]
+            "wifi": ["󰤟", "󰤥" ,"󰤨"],
+            "ethernet": ["󰈀"],
+            "disconnected": ["󰤯"]
         },
-        "on-click": "foot -e nmtui",
+        "on-click": "foot -e 'sleep .1; nmtui'",
         "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-bluetooth": "{icon} {volume}%",
-        "format-muted": " ",
+        "format-muted": "󰖁 {volume}%",
         "format-icons": {
-            "headphone": "",
+            "headphone": "󰋋",
             "hands-free": "",
-            "headset": "",
-            "phone": "",
+            "headset": "󰋋",
+            "phone": "󰋋",
             "portable": "",
             "default": "",
-            "speaker": ""
+            "speaker": "󰕾"
         },
         "scroll-step": 1,
         "on-click": "pavucontrol",
@@ -69,26 +70,38 @@
         "on-click": "foot -e spt",
         "escape": true
     },
-    "custom/nordvpn": {
-        "interval": 30,
-        "return-type": "json",
-        "exec": "~/.config/waybar/modules/nordvpn.sh",
-        "exec-if": "nordvpn status | rg Connected",
-        "escape": true
+    "cpu": {
+        "format": " {usage}%",
+        "format-alt": " {load}",
+        "format-alt-click": "click-right",
+        "states": {
+            "warning": 70,
+            "critical": 85
+        }
+    },
+    "memory": {
+        "format": " {percentage}%",
+        "format-alt": " {used:0.1f}/{total:0.1f} GB",
+        "format-alt-click": "click-right",
+        "states": {
+            "warning": 70,
+            "critical": 80
+        }
     },
     "backlight": {
         "device": "intel_backlight",
         "format": "{icon} {percent}%",
-        "format-icons": ["", ""],
-        "on-scroll-up": "brightnessctl set 5%-",
-        "on-scroll-down": "brightnessctl set +5%"
+        "format-icons": ["󰛩", "󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"],
+        "on-scroll-up": "brightnessctl set +5%",
+        "on-scroll-down": "brightnessctl set 5%-"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
+            "activated": "",
             "deactivated": ""
         },
+        "on-click": "swaylock",
         "tooltip": false
     },
     "tray": {

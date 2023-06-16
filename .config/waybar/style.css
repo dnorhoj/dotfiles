@@ -30,9 +30,13 @@
   margin: 0px 4px;
 }
 
+#workspaces button:not(.urgent) {
+  color: @base10;
+}
 
 #workspaces button:not(.urgent):hover {
   background-color: @base03;
+  color: @base10;
 }
 
 #workspaces button.focused {
@@ -84,11 +88,24 @@
   min-width: 20px;
 }
 
-#battery.warning {
+
+#cpu {
+  border-radius: 4px 0px 0px 4px;
+  margin-right: 0px;
+  border-right: 1px @base03 solid;
+}
+
+#memory {
+  border-radius: 0px 4px 4px 0px;
+  margin-left: 0px;
+  border-left: 1px @base03 solid;
+}
+
+.warning {
   color: @base0A;
 }
 
-#battery.critical {
+.critical {
   color: @base08;
 }
 
