@@ -1,0 +1,13 @@
+width=600
+height=420
+mode=drun
+filter_rate=100
+matching=contains
+insensitive=true
+term=foot
+allow_images=true
+allow_markup=true
+dmenu-parse_action=true
+drun-display_generic=false
+key_next=Down
+key_expand=Right
