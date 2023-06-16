@@ -1,0 +1,5 @@
+blur enable
+corner_radius 8
+shadows enable
+default_dim_inactive 0.1
+titlebar_separator disable

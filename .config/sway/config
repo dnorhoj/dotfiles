@@ -11,11 +11,12 @@ set $mod Mod4
 set $term foot
 
 # Menu
-set $menu exec wofi -IS drun
+set $menu exec wofi -aIS drun
 
 # Screens
 set $output-primary eDP-1
-set $output-secondary DP-2
+set $output-secondary DP-1
+set $output-third HDMI-A-2
 
 ######################
 # Idle configuration #
@@ -39,6 +40,7 @@ input * {
 input type:touchpad {
     tap enabled
     natural_scroll enabled
+    #dwt disabled
 }
 
 # Clipboard manager (clipman)
@@ -48,7 +50,7 @@ bindsym $mod+y exec clipman pick --tool="wofi" --max-items=30
 # Wob setup
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob -abottom -M100 -b1 -p1 -o0 -H30 --overflow-bar-color="#AAAAAAFF" --overflow-background-color="#000000DD" --background-color="#000000DD"
+exec mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 
 ################
 # Key bindings #
@@ -78,6 +80,8 @@ bindsym $mod+Shift+e exec swaynag -t error -m 'Confirm logout' -B 'Log out' 'swa
 # Start speedcrunch (calculator)
 bindsym $mod+c exec speedcrunch
 
+bindsym $mod+h exec kill -USR1 $(pidof waybar)
+
 # Special keys
 bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1| awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
 bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5% && pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | awk '{print substr($5, 1, length($5)-1)}' > $WOBSOCK
@@ -87,10 +91,18 @@ bindsym XF86MonBrightnessUp exec brightnessctl set +10% | sed -En 's/.*\(([0-9]+
 bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
 bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
 
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioStop exec playerctl stop
+
 # Screenshotting
 bindsym Print exec grim - | wl-copy -t image/png
 bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy -t image/png
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
+
+# Mirroring
+bindsym $mod+Shift+m exec wl-mirror eDP-1
 
 #################
 # Moving around #
@@ -219,6 +231,9 @@ default_floating_border pixel
 smart_borders on
 
 # Wallpaper
+#Kali
+#output * bg /home/dnorhoj/Pictures/wallpaper.png fill
+#Thingy
 output * bg /home/dnorhoj/Pictures/wallpaper2.jpg fill
 
 # Output setup
@@ -228,6 +243,9 @@ bindsym $mod+f12 output $output-primary pos 0 500; output $output-secondary tran
 
 # Second monitor landscape on mod+f11
 bindsym $mod+f11 output $output-primary pos 0 0; output $output-secondary transform 0 pos 1920 0
+
+# (For large screen over laptop screen) mod+f10
+bindsym $mod+f10 output eDP-1 pos 0 1080; output HDMI-A-2 pos 0 0
 
 # Enable waybar (config in ~/.config/waybar/)
 bar {
