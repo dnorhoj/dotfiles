@@ -44,7 +44,7 @@ input type:touchpad {
 }
 
 # Clipboard manager (clipman)
-exec wl-paste -t text --watch clipman store --max-items 1024
+exec wl-paste -t text --watch clipman store -P --max-items 1024
 bindsym $mod+y exec clipman pick --tool="wofi" --max-items=30
 
 # Wob setup
@@ -99,7 +99,7 @@ bindsym XF86AudioStop exec playerctl stop
 # Screenshotting
 bindsym Print exec grim - | wl-copy -t image/png
 bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy -t image/png
-bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f -
+bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f - -o ~/Pictures/screenshot.png
 
 # Mirroring
 bindsym $mod+Shift+m exec wl-mirror eDP-1
@@ -245,7 +245,10 @@ bindsym $mod+f12 output $output-primary pos 0 500; output $output-secondary tran
 bindsym $mod+f11 output $output-primary pos 0 0; output $output-secondary transform 0 pos 1920 0
 
 # (For large screen over laptop screen) mod+f10
-bindsym $mod+f10 output eDP-1 pos 0 1080; output HDMI-A-2 pos 0 0
+bindsym $mod+f10 output $output-primary pos 0 1080; output $output-secondary pos 0 0
+
+# Bruh
+bindsym $mod+f8 exec foot zsh -c "source ~/.aliases && fixeverything; echo DONE; read"
 
 # Enable waybar (config in ~/.config/waybar/)
 bar {
@@ -265,6 +268,9 @@ client.background       $base07
 
 # Font
 font pango:SourceCodePro Medium 11
+
+# Focus steal
+focus_on_window_activation focus
 
 #########
 # Other #
