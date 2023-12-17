@@ -67,7 +67,7 @@
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
         "exec-if": "pgrep spotify",
-        "on-click": "foot -e spt",
+        "on-click": "spotify",
         "escape": true
     },
     "cpu": {

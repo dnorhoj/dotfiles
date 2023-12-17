@@ -101,6 +101,9 @@ bindsym Print exec grim - | wl-copy -t image/png
 bindsym Shift+Print exec grim -g "$(slurp)" - | wl-copy -t image/png
 bindsym Ctrl+Print exec grim -g "$(slurp)" - | swappy -f - -o ~/Pictures/screenshot.png
 
+# Emoji
+bindsym $mod+comma exec ~/scripts/wofi-emoji.sh
+
 # Mirroring
 bindsym $mod+Shift+m exec wl-mirror eDP-1
 
@@ -234,7 +237,7 @@ smart_borders on
 #Kali
 #output * bg /home/dnorhoj/Pictures/wallpaper.png fill
 #Thingy
-output * bg /home/dnorhoj/Pictures/wallpaper2.jpg fill
+output * bg /home/dnorhoj/Documents/bliss.jpg fill
 
 # Output setup
 
@@ -248,7 +251,9 @@ bindsym $mod+f11 output $output-primary pos 0 0; output $output-secondary transf
 bindsym $mod+f10 output $output-primary pos 0 1080; output $output-secondary pos 0 0
 
 # Bruh
+bindsym $mod+f7 exec ~/scripts/clear_cache.sh
 bindsym $mod+f8 exec foot zsh -c "source ~/.aliases && fixeverything; echo DONE; read"
+bindsym $mod+j exec ~/scripts/joinmux
 
 # Enable waybar (config in ~/.config/waybar/)
 bar {
