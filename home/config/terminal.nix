@@ -12,6 +12,12 @@
 
       # nixos
       update = "~/.dotfiles/update.sh";
+
+      # misc
+      cd = "z";
+      gdb = "pwndbg";
+      ipme = "curl ip.me";
+      op = "xdg-open";
     };
 
     zplug = {
@@ -34,8 +40,9 @@
     enableZshIntegration = true;
   };
 
-  home.sessionVariables = {
-    EDITOR = "nvim";
+  programs.zoxide = {
+    enable = true;
+    enableZshIntegration = true;
   };
 
   programs.gnome-terminal = {

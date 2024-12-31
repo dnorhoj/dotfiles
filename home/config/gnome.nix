@@ -30,6 +30,7 @@ in {
         clock-show-weekday = true;
         color-scheme = "prefer-dark";
         enable-hot-corners = false;
+        show-battery-percentage = true;
       };
       "org/gnome/desktop/wm/preferences" = {
         button-layout = "appmenu:minimize,maximize,close";

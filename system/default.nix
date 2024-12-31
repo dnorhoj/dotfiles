@@ -23,7 +23,11 @@
 
     plymouth = {
       enable = true;
-      themePackages = with pkgs; [ (adi1090x-plymouth-themes.override {selected_themes = [ "abstract_ring" ]; }) ];
+      themePackages = with pkgs; [
+        (adi1090x-plymouth-themes.override {
+          selected_themes = [ "abstract_ring" ]; 
+        })
+      ];
       theme = "abstract_ring";
     };
 
@@ -101,8 +105,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager). services.xserver.libinput.enable = true;
-
   # ZSH
   programs.zsh.enable = true;
 
@@ -158,6 +160,11 @@
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;
+  };
+
+  environment.sessionVariables = {
+    EDITOR = "nvim";
+    NIXOS_OZONE_WL = 1;
   };
 
   # List services that you want to enable:
