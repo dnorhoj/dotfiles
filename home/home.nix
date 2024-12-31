@@ -1,43 +1,53 @@
 { config, pkgs, ... }: {
-  #nixpkgs = {
-  #  config = {
-  #    allowUnfree = true;
-  #  };
-  #};
-
   # Home Manager setup
   home.username = "dnorhoj";
   home.homeDirectory = "/home/dnorhoj";
 
   # Packages
   home.packages = with pkgs; [
-    # Terminal utils
+    # Terminal helpers
     neofetch
     eza
     htop
-    strace
-    ltrace
     neovim
     bat
     ripgrep
     fd
     glow
     rlwrap
-    socat
+
+    # Terminal tools
+    strace
+    ltrace
     netcat-openbsd
+    socat
+    binwalk
+    exiftool
+    pwndbg
+    pandoc
+
+    # Technical GUI tools
+    ghidra-bin
+    wireshark
 
     # Apps
     vscode
     discord
     spotify
+    signal-desktop
 
-    wireshark
+    audacity
     gnome-tweaks
 
     # Dev
+    nixpkgs-fmt
     rustup
-  ];
+    gh
 
+    # GUI
+    transmission_4
+    obsidian
+  ];
 
   # Program configurations
   programs.git = {
@@ -65,8 +75,9 @@
     };
   };
 
-  home.file = {
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
+  # Enable syncthing for file synchronization
+  services.syncthing = {
+    enable = true;
+    tray.enable = true;
   };
 }

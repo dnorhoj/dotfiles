@@ -7,5 +7,6 @@
       pycryptodome
       tqdm
     ]))
+    pipenv
   ];
 }
