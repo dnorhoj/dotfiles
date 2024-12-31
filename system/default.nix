@@ -66,8 +66,15 @@
     };
 
     xkb = {
-      layout = "us";
-      variant = "altgr-intl";
+      layout = "custom";
+
+      extraLayouts = {
+        custom = {
+          description = "English (US intl., with AltGr dead keys, danish)";
+          languages = [ "eng" "dan" ];
+          symbolsFile = ../xkb/custom;
+        };
+      };
     };
   };
 
