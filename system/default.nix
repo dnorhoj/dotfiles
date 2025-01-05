@@ -82,6 +82,13 @@
     };
   };
 
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-tour
+    geary
+    epiphany
+    simple-scan
+  ];
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -167,7 +174,10 @@
     NIXOS_OZONE_WL = 1;
   };
 
-  # List services that you want to enable:
+  services.mullvad-vpn = {
+    enable = true;
+    package = pkgs.mullvad-vpn;
+  };
 
   system.stateVersion = "24.11";
 }

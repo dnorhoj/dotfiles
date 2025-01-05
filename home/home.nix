@@ -47,6 +47,7 @@
     # GUI
     transmission_4
     obsidian
+    gnome-mines
   ];
 
   # Program configurations
