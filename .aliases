@@ -1,42 +1,11 @@
-# Shell Aliases
 alias ll='ls -alF'
 alias lls='ls -alF; ls'
-alias tree='exa --tree'
-alias cls='clear'
-alias h='echo h'
+alias tree='ls --tree'
 alias cd='z'
 alias cdd='zi'
 alias op='xdg-open'
 alias '$='
-alias hax=cmatrix
-
-# Vim boofing
-alias vim="lvim"
 alias :q="exit"
-
-# Spotify boofing
-alias sp="spotify"
-alias spp="spotify play"
-alias sps="spotify status -v"
-alias spn="spotify next"
-
-# Other aliases
 alias pippy='pipenv run python'
 alias ipme='curl ip.me'
-alias fopen='xdg-open $(fzf)'
-
-# Meme
-alias ifconfig='ifconfig | lolcat'
-alias cpmeme='wl-paste | meme /dev/stdin'
-
-# FootSSH
-footssh()
-{
-    if [[ $TERM = "foot" ]]; then
-	TERM=linux ssh $@
-    else
-	ssh $@
-    fi
-}
-
-alias ssh=footssh
+alias ip='ip -c'
